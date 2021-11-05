@@ -1,4 +1,4 @@
-# Portable WordPress Theme + Plugin Dev Environment
+# Portable WordPress Dev Environment
 
 Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Uses Docker, GulpJS, \_s, Laravel Blade Templates, MaterializeCSS as an example.
 
