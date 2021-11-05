@@ -1,12 +1,17 @@
-# PortableWP
-Dockerized WordPress development environment. Just need Docker + your favorite editor, all requirements/packages are installed in Docker containers: Docker, GulpJS, \_s, Laravel Blade Templates, MaterializeCSS.
+# Portable WordPress Theme + Plugin Dev Environment
 
+Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Uses Docker, GulpJS, \_s, Laravel Blade Templates, MaterializeCSS as an example.
+
+#### Background
+This is from a custom framework I worked on a few years ago. The motivation was to create a fully dockerized local dev environment so that devs didn't have to worry about installing and setting up WordPress + permissions + mysql + virtual envs...etc. Wanted devs to be able to start and initialize a new project with just one command so that we could focus on WordPress theme + plugin development.
+
+#### Update
+Most of the dependencies are outdated, but if there's interest or I get bored (:p), can update them to latest stable. Also, since it has been a few years, I assume there are frameworks/environments similar to this. Would be fun to continue working on the project or pickup a similar one, especially now that WordPress has a [REST API](https://developer.wordpress.org/rest-api/)
 
 ## Project Structure
 
-
 ```
-├── build
+├── build - automatically created on initialization
 │   └── wp-content
 │       ├── plugins
 │       ├── themes
@@ -16,7 +21,7 @@ Dockerized WordPress development environment. Just need Docker + your favorite e
 └── src
     ├── plugins
     └── themes
-        └── theme-dev
+        └── theme-dev - boilerplate template with _s (underscores) using WordPress best practices
             ├── blocks
             │   └── movie
             ├── cache
@@ -26,19 +31,6 @@ Dockerized WordPress development environment. Just need Docker + your favorite e
             ├── js
             ├── languages
             ├── layouts
-            ├── sass
-            │   ├── elements
-            │   ├── forms
-            │   ├── layout
-            │   ├── media
-            │   ├── mixins
-            │   ├── modules
-            │   ├── navigation
-            │   ├── site
-            │   │   ├── primary
-            │   │   └── secondary
-            │   ├── typography
-            │   └── variables-site
             ├── scss
             ├── template-parts
             └── views
@@ -49,10 +41,10 @@ Dockerized WordPress development environment. Just need Docker + your favorite e
 ```
 
 ## Prerequisites
-[Install Docker Compose](https://docs.docker.com/compose/install/)
+[Install Docker Compose V2](https://docs.docker.com/compose/cli-command/)
 
 ## Installation
-###### Note: Only used with Arch Linux, but should work on any OS/distro with Docker. Open an issue or pull request if needed.
+###### Note: Tested with Arch Linux, but should work on any OS/distro with Docker. Open an issue or pull request if needed.
 
 1. ```git clone repo```
 2. ```cd repo && source .bash_docker_aliases```
@@ -76,19 +68,5 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 - [WordPress](https://wordpress.org/)
 - [Yarn](https://yarnpkg.com/en/)
 
-## Contributing
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
-
 ## Related
 - [Sage](https://github.com/roots/sage)
-- [aaa](aaaa)
-- [aaa](aaaa)
-- [aaa](aaaa)
-- [aaa](aaaa)
-
-## License
-- License
