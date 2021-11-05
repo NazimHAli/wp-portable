@@ -1,0 +1,51 @@
+# Docker
+alias dpsa="docker ps -a"
+alias dstopall="docker stop \$(docker ps -a -q)"
+alias dremoveall="docker rm \$(docker ps -a -q) && docker network rm \$(docker network ls -q) && docker rmi -f \$(docker images \-f dangling=true -q) && docker volume rm \$(docker volume ls | grep \-v wordpress | awk '{ print \$2; }')"
+
+dcomposeup() {
+	if [ ! -d "build/" ]; then
+	  mkdir -pv build/wp-content/{plugins,themes,uploads,upgrade}
+	  docker compose up --build --remove-orphans -d
+	else
+		docker compose up -d
+	fi
+}
+
+dexec() {
+	docker exec -ti $@
+}
+
+dwpcli() {
+	wp_container=$(docker ps -aqf name=wordpress)
+	if [[ $wp_container ]]; then
+		docker run -it --rm --user 1000:1000 --volumes-from $wp_container --network container:$wp_container wordpress:cli $@
+	fi
+}
+
+dcomposer() {
+	docker run --rm --interactive --tty --volume "$PWD":/app --user $(id -u):$(id -g) composer:2.1.11 $@
+}
+
+dnode() {
+	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app node $@
+}
+
+dgulpwatch() {
+	echo "# ----------- Building & watching assets ----------- #"
+	dnode yarn && yarn watch
+}
+
+dfl() {
+	docker logs -f $(docker ps -aqf name=$1)
+}
+
+dcontainerrm() {
+	docker container rm -fv $@
+}
+
+dinitialsetup() {
+	dcomposeup
+	dcomposer install
+	dgulpwatch
+}

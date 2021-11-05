@@ -1,0 +1,17 @@
+*.css.map
+*.log
+*.phpintel
+*.sass.map
+*.scss.map
+*.zip
+.eslintcache
+.npm
+.sass-cache/
+.vscode
+.yarn-integrity
+build/
+logs
+node_modules/
+vendor/
+*sublime-workspace
+wpcs/

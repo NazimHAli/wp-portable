@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
+    "target": "es2021",
+    "strict": false
+  },
+  "include": ["./src/**/*.ts"]
+}

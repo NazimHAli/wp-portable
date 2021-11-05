@@ -1,0 +1,2 @@
+<?php
+render( 'sidebar' );

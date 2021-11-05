@@ -1,0 +1,16 @@
+# Node LTS Slim
+FROM node:14-slim
+
+RUN apt-get update &&\
+	apt-get install -y graphicsmagick
+
+# Environment variables for container
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
+
+WORKDIR /usr/src/app
+VOLUME ["/usr/src/app"]
+LABEL name="node"
+
+# Run as non-root user
+USER node

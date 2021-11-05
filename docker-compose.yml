@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: node
+    labels:
+      name: "node"
+    ports:
+      - "8080:8080"
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.wordpress
+    container_name: wordpress
+    labels:
+      name: "wordpress"
+    depends_on:
+      - mysql
+    volumes:
+      - ./build/wp-content/:/var/www/html/wp-content/
+    ports:
+      - "8001:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DEBUG: 0
+      WORDPRESS_ENV: development
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    labels:
+      name: "mysql"
+    volumes:
+      - mysql_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_USER: wordpress
+
+volumes:
+  mysql_db: {}

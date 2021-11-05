@@ -1,0 +1,12 @@
+[ignore]
+
+[include]
+./*.js
+[libs]
+
+[lints]
+
+[options]
+# all=off by default
+all=true
+[strict]
