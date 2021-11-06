@@ -1,7 +1,8 @@
-version: "3.7"
+version: "3.8"
 
 services:
   wordpress:
+    image: wp-wordpress:5.8.1
     build:
       context: .
       dockerfile: Dockerfile.wordpress
@@ -22,18 +23,11 @@ services:
       WORDPRESS_DEBUG: 0
       WORDPRESS_ENV: development
 
-  node:
+  mysql:
+    image: wp-mysql:8.0
     build:
       context: .
-      dockerfile: Dockerfile.node
-    container_name: wp-node
-    labels:
-      name: "wp-node"
-    ports:
-      - "8080:8080"
-
-  mysql:
-    image: mysql:5.7
+      dockerfile: Dockerfile.mysql
     container_name: wp-mysql
     labels:
       name: "wp-mysql"
@@ -44,6 +38,26 @@ services:
       MYSQL_PASSWORD: wordpress
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_USER: wordpress
+
+  node:
+    image: wp-node:14
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: wp-node
+    labels:
+      name: "wp-node"
+    ports:
+      - "8080:8080"
+
+  composer:
+    image: wp-composer:2.1.11
+    build:
+      context: .
+      dockerfile: Dockerfile.composer
+    container_name: wp-composer
+    labels:
+      name: "wp-composer"
 
 volumes:
   mysql_db: {}
