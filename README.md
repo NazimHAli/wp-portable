@@ -22,7 +22,7 @@ This is from a custom project I worked on a few years ago. There were 2 primary 
 ## Project Structure
 
 ```
-├── build - automatically created on initialization
+├── build - created after running dinit
 │   └── wp-content
 │       ├── plugins
 │       ├── themes
