@@ -1,18 +1,14 @@
-# Complete Dockerized WordPress Dev Environment
-##### Docker, GulpJS, \_s, Laravel Blade Templates, MaterializeCSS as an example
+# Dockerized WordPress Dev Environment
 
-Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers.
+Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Don't have to worry about installing and setting up WordPress + permissions + composer + mysql + virtual envs...etc.
 
 #### Motivation
 This is from a custom project I worked on a few years ago. There were 2 primary objectives:
- - Create a fully dockerized local dev environment so that devs didn't have to worry about installing and setting up WordPress + permissions + mysql + virtual envs...etc.
- - Rapidly compile WordPress templates and static assets (including pre-compiled HTML and PHP)
-
-#### Dependencies
-Some of the dependencies are outdated (I updated a few), but if there's interest or I get bored (:p), can update them to latest stable. Also, since it has been a few years, I assume there are frameworks/environments similar to this. Would be fun to continue working on the project or pickup a similar one, especially now that WordPress has a [REST API](https://developer.wordpress.org/rest-api/)
+ - Fully dockerized local dev environment
+ - Portable
 
 ## Prerequisites
-[Install Docker Compose V2](https://docs.docker.com/compose/cli-command/)
+[Docker Compose V2](https://docs.docker.com/compose/cli-command/)
 
 ## Install
 ###### Note: Tested with Arch Linux, but should work on any OS/distro with Docker. Open an issue or pull request if needed.
@@ -36,23 +32,7 @@ Some of the dependencies are outdated (I updated a few), but if there's interest
 └── src
     ├── plugins
     └── themes
-        └── theme-dev - boilerplate template with _s (underscores) using WordPress best practices
-            ├── blocks
-            │   └── movie
-            ├── cache
-            ├── images
-            │   └── slider_backgrounds
-            ├── inc
-            ├── js
-            ├── languages
-            ├── layouts
-            ├── scss
-            ├── template-parts
-            └── views
-                ├── components
-                ├── includes
-                ├── layouts
-                └── posts
+        └── theme-dev - custom starter template using _s (underscores)
 ```
 
 ## Related
