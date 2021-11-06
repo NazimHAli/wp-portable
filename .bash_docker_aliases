@@ -4,21 +4,20 @@ alias dstopall="docker stop \$(docker ps -a -q)"
 
 # Initial setup
 dinit() {
+	dinit_mkdirs
 	dinit_containers
 	dcomposer install
 }
 
 # Creates directories required for WordPress themes & plugins
 dinit_mkdirs() {
-	mkdir -pv build/wp-content/{plugins,themes,uploads,upgrade}
+	if [ ! -d "build/" ]; then
+		mkdir -pv build/wp-content/{plugins,themes,uploads,upgrade}
+	fi
 }
 
 dinit_containers() {
-	if [ ! -d "build/" ]; then
-		dinit_mkdirs
-	fi
-
-	docker compose up --build --remove-orphans -d
+	docker compose -f docker/docker-compose.yml up --build --remove-orphans -d
 }
 
 # Drop-in Docker replacements for CLI tools

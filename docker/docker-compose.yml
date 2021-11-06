@@ -21,7 +21,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./build/wp-content/:/var/www/html/wp-content/
+      - ../build/wp-content/:/var/www/html/wp-content/
     ports:
       - "8001:80"
     environment:
