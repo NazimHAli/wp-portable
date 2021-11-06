@@ -2,7 +2,7 @@
 
 Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Don't have to worry about installing and setting up WordPress + permissions + composer + mysql + virtual envs...etc.
 
-## Prerequisites
+## Pre-requisites
 [Docker Compose V2](https://docs.docker.com/compose/cli-command/)
 
 ## Install
