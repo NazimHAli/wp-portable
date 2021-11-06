@@ -41,7 +41,7 @@ dwpcli() {
 	fi
 }
 
-# Execute yarn commands in Docker
+# Example yarn commands in Docker
 dyarn() {
 	dnode yarn
 }
