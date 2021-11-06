@@ -1,6 +1,8 @@
+alias dimga="docker images -a"
 alias dpsa="docker ps -a"
 alias dremoveall="docker rm \$(docker ps -a -q) && docker network rm \$(docker network ls -q) && docker rmi -f \$(docker images \-f dangling=true -q) && docker volume rm \$(docker volume ls | grep \-v wordpress | awk '{ print \$2; }')"
-alias dstopall="docker stop \$(docker ps -a -q)"
+alias drmi="docker rmi -f"
+alias dstopall="docker stop \$(docker ps -a -q) && dremoveall"
 
 # Initial setup
 dinit() {
@@ -18,19 +20,20 @@ dinit_containers() {
 		dinit_mkdirs
 	fi
 
-	docker compose up --build --remove-orphans -d
+	docker compose -f docker/docker-compose.yml up --build --remove-orphans -d
 }
 
 # Drop-in Docker replacements for CLI tools
+# Creates a temporary container & cleans up remaining artifacts
 
 # composer
 dcomposer() {
-	docker run --rm -it --name composer_temp --user $(id -u):$(id -g) --volume "$PWD":/app composer:2.1.11 $@
+	docker run --rm -it --name composer_temp --user $(id -u):$(id -g) --volume "$PWD":/app wp-composer:2.1.11 $@
 }
 
 # node
 dnode() {
-	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app node $@
+	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app wp-node:14 $@
 }
 
 # wordpress:cli
