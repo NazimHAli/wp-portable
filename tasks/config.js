@@ -6,4 +6,8 @@ import { run } from "./run";
 const runOpts = { ...run.default, ...run.production };
 const pluginOpts = { ...plugins.default, ...plugins.production };
 
-export { paths, runOpts, pluginOpts };
+const argv = process.argv;
+const isProd = argv.includes("--env=production") || process.env.NODE_ENV === "production";
+const env = isProd ? "production" : "development";
+
+export { paths, runOpts, pluginOpts, env };
