@@ -11,7 +11,7 @@ Dockerized WordPress development environment. Just needs Docker + your favorite 
 1. ```git clone https://github.com/NazimHAli/wp-portable.git && cd wp-portable```
 2. ```source .bash_docker_aliases```
 3. ```dinit && dyarn_watch```  
-    - Open <a href="http://localhost:8001/" target="_blank">http://localhost:8001/</a>
+    - Open <a href="http://localhost:8888/" target="_blank">http://localhost:8888/</a>
 
 ## Project Structure
 

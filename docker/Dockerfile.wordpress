@@ -19,5 +19,3 @@ RUN echo "file_uploads = On\n" \
     "post_max_size = 250M\n" \
     "max_execution_time = 600\n" \
     > /usr/local/etc/php/conf.d/uploads.ini
-
-LABEL name="wordpress"

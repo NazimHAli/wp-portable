@@ -34,7 +34,7 @@ dnode() {
 
 # wordpress:cli
 dwpcli() {
-	wp_container=$(docker ps -aqf name=wordpress)
+	wp_container=$(docker ps -aqf name=wp-wordpress)
 	if [[ $wp_container ]]; then
 		docker run --rm -it --user 1000:1000 --volumes-from $wp_container --network container:$wp_container wordpress:cli wp $@
 	fi
