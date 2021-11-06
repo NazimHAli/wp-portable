@@ -1,51 +1,65 @@
-# Docker
 alias dpsa="docker ps -a"
-alias dstopall="docker stop \$(docker ps -a -q)"
 alias dremoveall="docker rm \$(docker ps -a -q) && docker network rm \$(docker network ls -q) && docker rmi -f \$(docker images \-f dangling=true -q) && docker volume rm \$(docker volume ls | grep \-v wordpress | awk '{ print \$2; }')"
+alias dstopall="docker stop \$(docker ps -a -q)"
 
-dcomposeup() {
+# Initial setup
+dinit() {
+	dinit_containers
+	dcomposer install
+}
+
+# Creates directories required for WordPress themes & plugins
+dinit_mkdirs() {
+	mkdir -pv build/wp-content/{plugins,themes,uploads,upgrade}
+}
+
+dinit_containers() {
 	if [ ! -d "build/" ]; then
-	  mkdir -pv build/wp-content/{plugins,themes,uploads,upgrade}
-	  docker compose up --build --remove-orphans -d
-	else
-		docker compose up -d
+		dinit_mkdirs
 	fi
+
+	docker compose up --build --remove-orphans -d
 }
 
-dexec() {
-	docker exec -ti $@
-}
+# Drop-in Docker replacements for CLI tools
 
-dwpcli() {
-	wp_container=$(docker ps -aqf name=wordpress)
-	if [[ $wp_container ]]; then
-		docker run -it --rm --user 1000:1000 --volumes-from $wp_container --network container:$wp_container wordpress:cli $@
-	fi
-}
-
+# composer
 dcomposer() {
-	docker run --rm --interactive --tty --volume "$PWD":/app --user $(id -u):$(id -g) composer:2.1.11 $@
+	docker run --rm -it --name composer_temp --user $(id -u):$(id -g) --volume "$PWD":/app composer:2.1.11 $@
 }
 
+# node
 dnode() {
 	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app node $@
 }
 
-dgulpwatch() {
-	echo "# ----------- Building & watching assets ----------- #"
-	dnode yarn && yarn watch
+# wordpress:cli
+dwpcli() {
+	wp_container=$(docker ps -aqf name=wordpress)
+	if [[ $wp_container ]]; then
+		docker run --rm -it --user $(id -u):$(id -g) --volumes-from $wp_container --network container:$wp_container wordpress:cli $@
+	fi
 }
 
+# Execute yarn commands in Docker
+dyarn() {
+	dnode yarn
+}
+
+dyarn_watch() {
+	dyarn && dyarn watch
+}
+
+# Follow logs
 dfl() {
 	docker logs -f $(docker ps -aqf name=$1)
 }
 
-dcontainerrm() {
-	docker container rm -fv $@
+# Execute raw commands in a Docker container
+dexec() {
+	docker exec -ti $@
 }
 
-dinitialsetup() {
-	dcomposeup
-	dcomposer install
-	dgulpwatch
+dconrm() {
+	docker container rm -fv $@
 }

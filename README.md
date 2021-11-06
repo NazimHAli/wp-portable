@@ -16,7 +16,7 @@ This is from a custom project I worked on a few years ago. There were 2 primary 
 1. ```git clone https://github.com/NazimHAli/wp-portable.git```
 2. ```cd wp-portable```
 3. ```source .bash_docker_aliases```
-4. ```dinitialsetup```
+4. ```dinit && dyarn_watch```
 5. Open <a href="http://localhost:8001/" target="_blank">http://localhost:8001/</a>
 
 ## Project Structure
