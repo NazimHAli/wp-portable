@@ -1,2 +1,0 @@
-<?php
-render( 'includes.footer' );
