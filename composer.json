@@ -1,5 +1,5 @@
 {
-  "name": "nazim/portable-wp",
+  "name": "nazim/wp-portable",
   "require": {
     "jenssegers/blade": "^1.2"
   },

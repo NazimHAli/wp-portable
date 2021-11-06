@@ -33,7 +33,7 @@ dcomposer() {
 
 # node
 dnode() {
-	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app wp-node:14 $@
+	docker run --rm -it --name node_temp --user "node" --volume "$PWD":/usr/src/app -w /usr/src/app node:14 $@
 }
 
 # wordpress:cli
@@ -46,7 +46,7 @@ dwpcli() {
 
 # Execute yarn commands in Docker
 dyarn() {
-	dnode yarn
+	dnode yarn $@
 }
 
 dyarn_watch() {

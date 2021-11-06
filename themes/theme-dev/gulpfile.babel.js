@@ -1,19 +1,15 @@
 const del = require("del");
 const gulp = require("gulp");
-const autoprefixer = require("gulp-autoprefixer");
 const babel = require("gulp-babel");
 const changed = require("gulp-changed");
 const concat = require("gulp-concat");
-const minifyCSS = require("gulp-csso");
 const gulpif = require("gulp-if");
-const rename = require("gulp-rename");
-const sass = require("gulp-sass")(require("sass"));
 const size = require("gulp-size");
-const stylelint = require("gulp-stylelint");
 const tsc = require("gulp-typescript");
 const uglify = require("gulp-uglify-es");
 
 const { allPaths, srcPathsToWatch, themeDir } = require("./tasks/paths.js");
+const { compileCSS } = require("./tasks/compileCSS");
 
 const argv = process.argv;
 const isProd =
@@ -21,36 +17,6 @@ const isProd =
 const env = isProd ? "production" : "development";
 
 console.log(`\n# ----------- Environment: ${env} ----------- #\n`);
-
-/*
- *----------------------------------------------------------
- * CSS & SCSS
- *----------------------------------------------------------
- */
-
-const compileCSS = (done) => {
-  allPaths.map((path) => {
-    const isCSSorSASS = path.process.css || path.process.scss;
-    if (isCSSorSASS) {
-      // cleanup(path.dest, 'css');
-      gulp
-        .src(isCSSorSASS, { sourcemaps: true })
-        .pipe(changed(path.dest, { extension: ".css" }))
-        .pipe(gulpif((file) => isFileType(file, "scss"), sass()))
-        .pipe(
-          gulpif(
-            env === "development",
-            stylelint({ fix: true, failAfterError: false })
-          )
-        )
-        .pipe(gulpif(env === "production", autoprefixer()))
-        .pipe(gulpif(env === "production", minifyCSS()))
-        .pipe(gulpif(env === "production", rename({ extname: ".min.css" })))
-        .pipe(gulp.dest(path.dest), { sourcemaps: true });
-    }
-  });
-  done();
-};
 
 /*
  *----------------------------------------------------------
@@ -191,6 +157,7 @@ const cleanup = (path, filetype) => {
 };
 
 const deleteThemeFolder = (done) => {
+  console.log("themeDir.dest", themeDir.dest);
   del.sync([themeDir.dest]);
   done();
 };
@@ -200,9 +167,9 @@ const isFileType = (file, type) => {
 };
 
 const copyOtherDependencies = (done) => {
-  allPaths.map((path) => {
-    if (path.process.copy) {
-      gulp.src(path.process.copy).pipe(gulp.dest(path.dest));
+  allPaths.map((pathObj) => {
+    if (pathObj.process.copy) {
+      gulp.src(pathObj.process.copy).pipe(gulp.dest(pathObj.dest));
     }
   });
   done();
@@ -216,7 +183,7 @@ const watchFileChanges = () => {
 };
 
 exports.watch = gulp.series(
-  deleteThemeFolder,
+  // deleteThemeFolder,
   gulp.parallel(
     compileCSS,
     compileJS,

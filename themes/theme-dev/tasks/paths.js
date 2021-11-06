@@ -2,8 +2,8 @@
 const themeName = "theme-dev";
 
 export const themeDir = {
-  src: `src/themes/${themeName}`,
-  dest: `build/wp-content/themes/${themeName}`,
+  src: "./src",
+  dest: `../../build/wp-content/themes/${themeName}`,
 };
 
 /*

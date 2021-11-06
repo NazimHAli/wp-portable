@@ -9,9 +9,9 @@
 .sass-cache/
 .vscode
 .yarn-integrity
-build/
-logs
-node_modules/
-vendor/
+*build/
+*logs/
+*node_modules/
+*vendor/
 *sublime-workspace
-wpcs/
+*wpcs/

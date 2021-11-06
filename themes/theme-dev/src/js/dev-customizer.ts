@@ -9,6 +9,7 @@
 declare const wp;
 declare const jQuery;
 
+
 (($) => {
   // Site title and description.
   wp.customize("blogname", (value) => {
