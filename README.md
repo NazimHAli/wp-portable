@@ -2,7 +2,10 @@
 
 Example of a Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Don't have to install and set-up WordPress, permissions, composer, mysql, node.
 
-I used this years ago and extracted some of the build logic. The setup can be used with any current theme framework, a custom (old) example is provided. Some of the dependencies were updated, but not all.
+I used this 5+ years ago and extracted some of the build logic. The setup can be used with any current theme framework, a custom (old) example is provided. Some of the dependencies were updated, but not all. Since this is pretty old, I'd expect similar (and better) ones out by now.
+
+*Update:* Looks like there's finally a setup package [@wordpress/env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)
+> `wp-env` lets you easily set up a local WordPress environment for building and testing plugins and themes. It’s simple to install and requires no configuration.
 
 ## Prerequisites
 [Docker Compose V2](https://docs.docker.com/compose/cli-command/)
@@ -33,4 +36,5 @@ I used this years ago and extracted some of the build logic. The setup can be us
 ```
 
 ## Related
+- [ddev](https://ddev.readthedocs.io/en/stable/)
 - [Sage](https://github.com/roots/sage)
