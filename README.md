@@ -2,7 +2,7 @@
 
 Example of a Dockerized WordPress development environment. Just needs Docker + your favorite editor, all requirements/packages are installed in Docker containers. Don't have to install and set-up WordPress, permissions, composer, mysql, node.
 
-I used this years ago and extracted some of the build logic. The setup can be used with any current theme framework, a custom example is provided. Some of the dependencies were updated, but not all.
+I used this years ago and extracted some of the build logic. The setup can be used with any current theme framework, a custom (old) example is provided. Some of the dependencies were updated, but not all.
 
 ## Prerequisites
 [Docker Compose V2](https://docs.docker.com/compose/cli-command/)
